@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oracle Labyrinth</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <header>
+            <h1>Oracle Labyrinth 🛸</h1>
+            <div id="oracle-status">
+                <div id="oracle-archetype">Archetype: <span>Analyzing...</span></div>
+                <div>Oracle: <span id="oracle-mode">Passive</span></div>
+                <div id="flux-container">
+                    <div id="flux-meter"><div class="flux-bar"></div></div>
+                    <span class="flux-label">Flux: Steady</span>
+                </div>
+                <div id="pathos-status">Pathos: <span>Analyzing...</span></div>
+                <div id="soma-status">Soma: <span>Analyzing...</span></div>
+            </div>
+        </header>
+        <main>
+            <div id="room-description">
+                <p>Welcome to the Labyrinth. The Oracle is watching.</p>
+            </div>
+            <div id="oracle-prophecy"></div>
+            <div id="controls">
+                <!-- Navigation buttons will be injected here -->
+            </div>
+            <div id="oracle-shortcuts">
+                <!-- Action chains will be injected here -->
+            </div>
+            <div id="inventory">
+                <h3>Inventory</h3>
+                <ul id="inventory-list"></ul>
+            </div>
+        </main>
+        <aside id="oracle-console">
+            <h3>Oracle Prediction Log</h3>
+            <div id="prediction-list"></div>
+        </aside>
+    </div>
+    <script type="module" src="index.js"></script>
+</body>
+</html>
