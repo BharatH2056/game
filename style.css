@@ -1,0 +1,586 @@
+body {
+    background-color: #0a0a0c;
+    color: #e0e0e0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+}
+
+#game-container {
+    max-width: 800px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    background: #16161a;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transition: background-color 1.5s ease-out, box-shadow 1.5s ease-out, border-color 0.5s ease;
+}
+
+.flow-active {
+    border: 1px solid rgba(255, 0, 255, 0.3);
+    animation: flow-liquid 4s infinite alternate;
+}
+
+@keyframes flow-liquid {
+    0% { border-radius: 12px 12px 12px 12px; box-shadow: 0 10px 40px rgba(255, 0, 255, 0.2); }
+    33% { border-radius: 15px 10px 18px 12px; }
+    66% { border-radius: 10px 18px 12px 15px; }
+    100% { border-radius: 12px 12px 12px 12px; box-shadow: 0 10px 60px rgba(0, 255, 255, 0.3); }
+}
+
+header {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #333;
+    padding-bottom: 1rem;
+}
+
+#oracle-status {
+    font-size: 0.9rem;
+    color: #888;
+    text-align: right;
+}
+
+#oracle-status span {
+    color: #00ffcc;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+#flux-container {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+#flux-meter {
+    width: 100px;
+    height: 4px;
+    background: #333;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 0.2rem;
+}
+
+.flux-bar {
+    width: 50%;
+    height: 100%;
+    background: #00ffcc;
+    transition: width 0.5s ease, background 0.5s ease;
+}
+
+.flux-label {
+    font-size: 0.65rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#oracle-archetype {
+    margin-bottom: 0.2rem;
+    font-size: 0.75rem;
+    color: #ff00ff;
+}
+
+#oracle-archetype span {
+    color: #ff00ff;
+}
+
+#pathos-status {
+    font-size: 0.7rem;
+    color: #888;
+    margin-top: 0.2rem;
+    text-transform: uppercase;
+}
+
+#pathos-status span {
+    font-weight: bold;
+}
+
+#soma-status {
+    font-size: 0.7rem;
+    color: #888;
+    margin-top: 0.2rem;
+    text-transform: uppercase;
+}
+
+#soma-status span {
+    font-weight: bold;
+}
+
+#room-description {
+    min-height: 180px;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    position: relative;
+}
+
+#oracle-vision {
+    margin-top: 1rem;
+    font-style: italic;
+    color: #00ffcc;
+    font-size: 0.9rem;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.vision-label {
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    margin-right: 5px;
+    font-weight: bold;
+}
+
+.vision-deep {
+    margin-top: 0.25rem;
+    color: #ff00ff;
+    font-size: 0.8rem;
+    opacity: 0.8;
+    pointer-events: none;
+}
+
+.vision-collective {
+    color: #00ffff !important;
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+}
+
+.vision-synapse {
+    color: #ff00ff !important;
+    text-shadow: 0 0 8px rgba(255, 0, 255, 0.6);
+}
+
+.vision-guidance {
+    color: #00ccff !important;
+    text-shadow: 0 0 8px rgba(0, 204, 255, 0.5);
+}
+
+.vision-soma {
+    color: #ff9900 !important;
+    text-shadow: 0 0 8px rgba(255, 153, 0, 0.5);
+}
+
+.vision-argus {
+    color: #ffd700 !important;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+}
+
+.vision-mnemosyne {
+    color: #ffd700 !important;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+}
+
+.vision-label-deep {
+    text-transform: uppercase;
+    font-size: 0.6rem;
+    letter-spacing: 1px;
+    margin-right: 5px;
+    font-weight: bold;
+}
+
+#controls {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+button {
+    background: #24242b;
+    border: 1px solid #444;
+    color: #fff;
+    padding: 1rem;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+button:hover {
+    background: #32323d;
+}
+
+/* Prediction styles */
+button.oracle-hint {
+    border-color: #00ffcc;
+    box-shadow: 0 0 10px rgba(0, 255, 204, 0.3);
+    position: relative;
+}
+
+.resonance-meter {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: #00ffcc;
+    box-shadow: 0 0 10px #00ffcc;
+    transition: width 0.1s linear;
+}
+
+.stagnation-pulse {
+    animation: stagnation-glow 1s infinite alternate;
+    border-color: #ff00ff !important;
+}
+
+@keyframes stagnation-glow {
+    from { box-shadow: 0 0 5px #ff00ff; }
+    to { box-shadow: 0 0 25px #ff00ff; }
+}
+
+button.oracle-hint::after {
+    content: '👁️';
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    font-size: 1rem;
+    filter: drop-shadow(0 0 5px #00ffcc);
+}
+
+button.oracle-intuitive {
+    border-color: #ff00ff !important;
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.4);
+}
+
+button.oracle-intuitive::before {
+    content: '🧠';
+    position: absolute;
+    top: -12px;
+    left: -12px;
+    font-size: 1rem;
+    filter: drop-shadow(0 0 5px #ff00ff);
+}
+
+button.oracle-collective {
+    border-color: #00ffff !important;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+}
+
+button.oracle-collective::before {
+    content: '📡';
+    position: absolute;
+    top: -12px;
+    left: -12px;
+    font-size: 1rem;
+    filter: drop-shadow(0 0 5px #00ffff);
+}
+
+button.oracle-spatial {
+    border-color: #00ccff !important;
+}
+
+button.oracle-spatial::before {
+    content: '🛸';
+    position: absolute;
+    top: -12px;
+    left: -12px;
+    font-size: 1rem;
+    filter: drop-shadow(0 0 5px #00ccff);
+}
+
+button.mnemosyne-recall {
+    border-color: #ffd700 !important;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+    background: #1a1a00;
+}
+
+button.mnemosyne-recall::before {
+    content: '🏛️';
+    position: absolute;
+    top: -12px;
+    left: -12px;
+    font-size: 1rem;
+    filter: drop-shadow(0 0 5px #ffd700);
+}
+
+button.synapse-lock {
+    border-color: #ff00ff !important;
+    box-shadow: 0 0 20px rgba(255, 0, 255, 0.6);
+    background: #1a001a;
+}
+
+button.synapse-lock::after {
+    content: '⚡';
+    position: absolute;
+    top: -15px;
+    right: 50%;
+    transform: translateX(50%);
+    font-size: 1.2rem;
+    animation: synapse-pulse 0.5s infinite alternate;
+}
+
+@keyframes collective-pulse {
+    0% { transform: scale(1); filter: drop-shadow(0 0 2px #00ffff); }
+    50% { transform: scale(1.3); filter: drop-shadow(0 0 10px #00ffff); }
+    100% { transform: scale(1); filter: drop-shadow(0 0 2px #00ffff); }
+}
+
+@keyframes synapse-pulse {
+    0% { transform: scale(1); filter: drop-shadow(0 0 2px #ff00ff); }
+    50% { transform: scale(1.3); filter: drop-shadow(0 0 8px #ff00ff); }
+    100% { transform: scale(1); filter: drop-shadow(0 0 2px #ff00ff); }
+}
+
+button.guidance-aura {
+    border-color: #00ccff !important;
+    box-shadow: 0 0 20px rgba(0, 204, 255, 0.6);
+    animation: guidance-pulse 2s infinite ease-in-out;
+}
+
+button.guidance-aura::after {
+    content: '🛡️';
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    font-size: 1rem;
+}
+
+button.soma-lock {
+    border-color: #ff9900 !important;
+    box-shadow: 0 0 20px rgba(255, 153, 0, 0.6);
+    background: #1a0f00;
+}
+
+button.soma-lock::after {
+    content: '🔋';
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.2rem;
+    animation: soma-pulse 1s infinite ease-in-out;
+}
+
+button.argus-focus {
+    border-color: #ffd700 !important;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+    background: #1a1a00;
+}
+
+button.argus-focus::after {
+    content: '👁️‍🗨️';
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.2rem;
+    animation: argus-pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes argus-pulse {
+    0% { transform: translateX(-50%) scale(1); filter: drop-shadow(0 0 2px #ffd700); }
+    50% { transform: translateX(-50%) scale(1.3); filter: drop-shadow(0 0 10px #ffd700); }
+    100% { transform: translateX(-50%) scale(1); filter: drop-shadow(0 0 2px #ffd700); }
+}
+
+@keyframes soma-pulse {
+    0% { transform: translateX(-50%) scale(1); opacity: 0.8; }
+    50% { transform: translateX(-50%) scale(1.2); opacity: 1; }
+    100% { transform: translateX(-50%) scale(1); opacity: 0.8; }
+}
+
+.soma-bloom {
+    animation: soma-bloom-pulse 10s infinite alternate ease-in-out;
+}
+
+@keyframes soma-bloom-pulse {
+    0% { box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+    100% { box-shadow: 0 10px 60px rgba(255, 153, 0, 0.2); border-color: rgba(255, 153, 0, 0.3); }
+}
+
+@keyframes guidance-pulse {
+    0% { box-shadow: 0 0 5px rgba(0, 204, 255, 0.4); }
+    50% { box-shadow: 0 0 25px rgba(0, 204, 255, 0.8); }
+    100% { box-shadow: 0 0 5px rgba(0, 204, 255, 0.4); }
+}
+
+#oracle-console {
+    background: #000;
+    padding: 1rem;
+    border-radius: 6px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.8rem;
+    height: 400px;
+    overflow-y: auto;
+}
+
+#prediction-list div {
+    margin-bottom: 0.5rem;
+    color: #00ffcc;
+    opacity: 0.5;
+}
+
+#prediction-list div.log-contextual {
+    color: #ff00ff;
+    opacity: 0.8;
+}
+
+#prediction-list div.log-intuitive {
+    color: #ff00ff;
+    font-weight: bold;
+    opacity: 1;
+    border-left: 2px solid #ff00ff;
+    padding-left: 5px;
+}
+
+#prediction-list div.log-collective {
+    color: #00ffff;
+    font-weight: bold;
+    opacity: 1;
+    border-left: 2px solid #00ffff;
+    padding-left: 5px;
+}
+
+#prediction-list div.log-spatial {
+    color: #00ccff;
+    font-weight: bold;
+    opacity: 0.9;
+    border-left: 2px solid #00ccff;
+    padding-left: 5px;
+}
+
+#prediction-list div.log-mnemosyne {
+    color: #ffd700;
+    font-weight: bold;
+    opacity: 1;
+    border-left: 2px solid #ffd700;
+    padding-left: 5px;
+}
+
+.prefetching {
+    animation: pulse 1.5s infinite;
+}
+
+#oracle-shortcuts {
+    margin-top: 1.5rem;
+    border-top: 1px dashed #444;
+    padding-top: 1rem;
+}
+
+.shortcut-banner {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: #ff00ff;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.oracle-shortcut-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #1a0033 0%, #330066 100%);
+    border: 1px solid #ff00ff;
+    color: #ff00ff;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.2);
+}
+
+.oracle-shortcut-btn:hover {
+    background: linear-gradient(135deg, #330066 0%, #1a0033 100%);
+    box-shadow: 0 0 20px rgba(255, 0, 255, 0.4);
+}
+
+.oracle-phantasm {
+    margin-top: 0.5rem;
+    color: #00ffcc;
+    font-style: italic;
+    font-size: 0.85rem;
+    animation: phantasm-flicker 4s infinite;
+    pointer-events: none;
+}
+
+.oracle-phantasm a {
+    pointer-events: auto;
+    color: #ff00ff;
+    text-decoration: none;
+    border-bottom: 1px dotted #ff00ff;
+}
+
+.saliency-point {
+    color: #00ffcc;
+    border-bottom: 1px dashed rgba(0, 255, 204, 0.4);
+    cursor: crosshair;
+    transition: all 0.3s ease;
+}
+
+.saliency-point:hover {
+    color: #ffd700;
+    border-bottom-color: #ffd700;
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+    background: rgba(255, 215, 0, 0.1);
+}
+
+@keyframes phantasm-flicker {
+    0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+        opacity: 0.8;
+    }
+    20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+        opacity: 0.3;
+    }
+}
+
+@keyframes pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+}
+
+/* Prophecy Styles */
+#oracle-prophecy {
+    margin: 1rem 0;
+    padding: 1rem;
+    background: rgba(26, 0, 51, 0.6);
+    border: 1px solid #ff00ff;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    display: none;
+    transition: all 0.5s ease;
+}
+
+#oracle-prophecy.visible {
+    display: block;
+    animation: prophecy-reveal 0.8s ease-out;
+}
+
+.prophecy-glow {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 0, 255, 0.1),
+        rgba(255, 0, 255, 0.2),
+        rgba(255, 0, 255, 0.1),
+        transparent
+    );
+    animation: prophecy-shimmer 3s infinite linear;
+}
+
+.prophecy-content {
+    position: relative;
+    z-index: 1;
+    color: #ff00ff;
+    font-style: italic;
+    text-shadow: 0 0 8px rgba(255, 0, 255, 0.3);
+}
+
+@keyframes prophecy-reveal {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes prophecy-shimmer {
+    from { transform: translateX(0); }
+    to { transform: translateX(100%); }
+}
